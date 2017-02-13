@@ -5,6 +5,7 @@ define(["jquery", "app/languageCodes", "app/wordlists"],
         // languageCodes = languageCodes;
         // wordlists = wordlists;
         workingList = [];
+        voiceName = "";
         //selectedSightWordSetList = [];
 
         loadSetListList = function() {
@@ -73,16 +74,28 @@ define(["jquery", "app/languageCodes", "app/wordlists"],
 
             $.each(voicelist, function() {
                 vselect.append($("<option />").val(this.name).text(this.name));
+
+                var voiceOption =
+                    $("<a href='#'>")
+                    .attr("href", "#" + this.name)
+                    .attr("class", "voiceOption")
+                    .append(this.name);
+                voiceOption.click(function() { loadVoice(this); });
+                $("#voiceselectionDropDownList").append($("<li>").append(voiceOption));
             });
-        }
+        };
+
+        loadVoice = function(anchor) {
+            voiceName = anchor.href.split("#")[1];
+        };
 
         sayWord = function() {
             sayThisWord($("#word").html());
-        }
+        };
 
         sayThisWord = function(word) {
-            responsiveVoice.speak(word, $('#voiceselection').val());
-        }
+            responsiveVoice.speak(word, voiceName);
+        };
 
         displayRandom = function() {
             var previous = $("#word").html();
@@ -92,12 +105,12 @@ define(["jquery", "app/languageCodes", "app/wordlists"],
                 word = $(".word")[index].attributes.word.value;
             }
             displayWord(word);
-        }
+        };
 
         displayWord = function(word) {
             $("#word").empty();
             $("#word").append(word);
-        }
+        };
 
         clearWord = function() {
             $("#word").empty();
@@ -107,6 +120,8 @@ define(["jquery", "app/languageCodes", "app/wordlists"],
         initialise = function() {
             loadSetListList();
             loadVoiceList();
+
+            loadVoice($(".voiceOption")[0]);
 
             $("#pickRandomWordButton").click(function() { displayRandom(); });
             $("#sayWordButton").click(function() { sayWord(); });

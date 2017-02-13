@@ -13,12 +13,17 @@
             <ul class="nav navbar-nav">
                 <li><a class="nav-link" href="index.html">Home</a></li>
                 <li><a class="nav-link" href="read.html">Read</a></li>
-                <li><a class="nav-link disabled" href="spell.html">Spell (coming soon)</a></li>
-                <li><a class="nav-link disabled" href="find.html">Find (coming soon)</a></li>
-                <li><a class="nav-link disabled" href="fix.html">Fix (coming soon)</a></li>
+                <li><a class="nav-link" href="#">Spell (coming soon)</a></li>
+                <li><a class="nav-link" href="#">Find (coming soon)</a></li>
+                <li><a class="nav-link" href="#">Fix (coming soon)</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li>Word lists: <select class="form-control" id="setListsSelection"></select></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Word lists<span class="caret"></span></a>
+                    <ul class="dropdown-menu" id="setListsDropDownList">
+                    </ul>
+                </li>
+                <!--<li>Word lists: <select class="form-control" id="setListsSelection"></select></li>-->
                 <li>Voice: <select class="form-control" id="voiceselection"></select></li>
             </ul>
         </div>

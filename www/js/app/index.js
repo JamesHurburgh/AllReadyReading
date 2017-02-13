@@ -5,24 +5,42 @@ define(["jquery", "app/languageCodes", "app/wordlists"],
         // languageCodes = languageCodes;
         // wordlists = wordlists;
         workingList = [];
-        selectedSightWordSetList = [];
+        //selectedSightWordSetList = [];
 
         loadSetListList = function() {
             for (var i = 0; i < wordlists.length; i++) {
+                wordlists[wordlists[i].setListName] = wordlists[i];
                 $("#setListsSelection").append("<option value='" + i + "'>" + wordlists[i].setListName + "</option>");
+
+                var setListName =
+                    $("<a href='#'>")
+                    .attr("href", "#" + wordlists[i].setListName)
+                    .append(wordlists[i].setListName);
+                setListName.click(function() { loadSetFromAnchor(this); });
+                $("#setListsDropDownList").append($("<li>").append(setListName));
             }
-        }
+        };
 
-        loadSetList = function() {
-            var index = $("#setListsSelection").val();
-            selectedSightWordSetList = wordlists[index].sets;
+        loadSetFromAnchor = function(anchor) {
+            var setName = anchor.href.split("#")[1];
+            loadSetFromList(wordlists[setName]);
+        };
 
+        loadSetListFromHash = function() {
+            var setName = window.location.hash.split("#")[1];
+            loadSetFromList(wordlists[setName]);
+        };
+
+        loadSetFromList = function(setList) {
             clearWord();
             $("#wordList").empty();
             $("#setList").empty();
             $("#setListHeader").empty();
+            $("#wordListHeader").empty();
+            selectedSightWordSetList = setList.sets;
 
-            $("#setListHeader").append($("#setListsSelection option:selected").text());
+            $("#setListHeader").append(setList.setListName);
+            $("#wordListHeader").append("-");
 
             for (var i = 0; i < selectedSightWordSetList.length; i++) {
                 $("#setList").append("<div class='set nav nav-pill' style='border: 2px solid #" + selectedSightWordSetList[i].colorHex + "; border-radius: 5px;' collectionIndex='" + i + "' id='" + selectedSightWordSetList[i].setName + "_set'>" + selectedSightWordSetList[i].setName + "</div>");
@@ -95,7 +113,7 @@ define(["jquery", "app/languageCodes", "app/wordlists"],
             $("#word").click(function() { sayWord(); });
 
             $("#setListsSelection").change(function() { loadSetList(); });
-            loadSetList();
+            loadSetFromList(wordlists[0]);
         };
 
         initialise();

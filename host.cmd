@@ -1,1 +1,1 @@
-ws
+ws -d www

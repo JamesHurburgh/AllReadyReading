@@ -1,5 +1,5 @@
-define(["jquery", "app/languageCodes", "app/wordlists"],
-    function($, languageCodes, wordlists) {
+define([        "jquery",   "store",    "app/languageCodes",    "app/wordlists"],
+    function(   $,          store,      languageCodes,          wordlists) {
 
         // ResponsiveVoice = responsivevoice;
         // languageCodes = languageCodes;
@@ -29,10 +29,15 @@ define(["jquery", "app/languageCodes", "app/wordlists"],
 
         loadSetListFromHash = function() {
             var setName = window.location.hash.split("#")[1];
-            loadSetFromList(wordlists[setName]);
+            loadSetListFromName(wordlists[setName]);
         };
 
+        loadSetListFromName = function(setName){
+            loadSetFromList(wordlists[setName]);
+        }
+
         loadSetFromList = function(setList) {
+            store.set("wordSet", setList.setListName);
             clearWord();
             $("#wordList").empty();
             $("#setList").empty();
@@ -52,10 +57,10 @@ define(["jquery", "app/languageCodes", "app/wordlists"],
         }
 
         loadWordList = function(index) {
+            var set = selectedSightWordSetList[index];
             clearWord();
             $("#wordList").empty();
             $("#wordListHeader").empty();
-            var set = selectedSightWordSetList[index];
             $("#wordContainer").css("border-radius", "10px");
             $("#wordContainer").css("border", "4px solid white");
             $("#wordContainer").css("border", "4px solid #" + set.colorHex);
@@ -86,7 +91,11 @@ define(["jquery", "app/languageCodes", "app/wordlists"],
         };
 
         loadVoice = function(anchor) {
-            voiceName = anchor.href.split("#")[1];
+            loadVoiceByName(anchor.href.split("#")[1]);
+        };
+
+        loadVoiceByName = function(voiceName){
+            store.set("voiceName", voiceName);
         };
 
         sayWord = function() {
@@ -115,20 +124,36 @@ define(["jquery", "app/languageCodes", "app/wordlists"],
         clearWord = function() {
             $("#word").empty();
             $("#word").append("-");
-        }
-
-        initialise = function() {
-            loadSetListList();
+        };
+        
+        initialiseVoice = function(){
             loadVoiceList();
 
-            loadVoice($(".voiceOption")[0]);
+            voiceName = store.get("voiceName");
+            if(!voiceName) { voiceName = $(".voiceOption")[0];}
+            loadVoiceByName(voiceName);
+        };
+
+        initialiseWordLists = function(){
+            loadSetListList();
+            $("#setListsSelection").change(function() { loadSetList(); });
+            
+            var startingWordSet = store.get("wordSet");
+            if(!startingWordSet) { startingWordSet = wordlists[0].setListName;}
+            loadSetListFromName(startingWordSet);
+
+            var startingSetList = store.get("setList");
+            if(!startingSetList) { startingSetList = wordlists[0].sets[0].setListName;}
+        };
+
+        initialise = function() {
+
+            initialiseVoice();
+            initialiseWordLists();
 
             $("#pickRandomWordButton").click(function() { displayRandom(); });
             $("#sayWordButton").click(function() { sayWord(); });
             $("#word").click(function() { sayWord(); });
-
-            $("#setListsSelection").change(function() { loadSetList(); });
-            loadSetFromList(wordlists[0]);
         };
 
         initialise();

@@ -33,11 +33,11 @@ requirejs(['jquery', 'app/common', "store", "app/languageCodes", "app/wordlists"
             }
             $("#spellingWord").val(word);
             $("#typedWord").val("");
-            say("Spell. " + word);
+            saySlowly("Spell. " + word);
         };
 
         sayWord = function() {
-            say($("#spellingWord").val());
+            saySlowly($("#spellingWord").val());
         };
 
         check = function() {
@@ -79,6 +79,9 @@ requirejs(['jquery', 'app/common', "store", "app/languageCodes", "app/wordlists"
 
         loadWordList = function(index) {
             set = selectedSightWordSetList[index];
+            $("#wordContainer").css("border-radius", "10px");
+            $("#wordContainer").css("border", "4px solid white");
+            $("#wordContainer").css("border", "4px solid #" + set.colorHex);
         };
 
         initialise = function() {

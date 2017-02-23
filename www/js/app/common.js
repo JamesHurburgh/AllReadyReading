@@ -1,5 +1,5 @@
-define([        "jquery",   "store",    "app/languageCodes",    "app/wordlists"],
-    function(   $,          store,      languageCodes,          wordlists) {
+define(["jquery", "store", "app/languageCodes", "app/wordlists"],
+    function($, store, languageCodes, wordlists) {
 
         // ResponsiveVoice = responsivevoice;
         // languageCodes = languageCodes;
@@ -32,7 +32,7 @@ define([        "jquery",   "store",    "app/languageCodes",    "app/wordlists"]
             loadSetListFromName(wordlists[setName]);
         };
 
-        loadSetListFromName = function(setName){
+        loadSetListFromName = function(setName) {
             loadSetFromList(wordlists[setName]);
         }
 
@@ -94,8 +94,9 @@ define([        "jquery",   "store",    "app/languageCodes",    "app/wordlists"]
             loadVoiceByName(anchor.href.split("#")[1]);
         };
 
-        loadVoiceByName = function(voiceName){
+        loadVoiceByName = function(voiceName) {
             store.set("voiceName", voiceName);
+            responsiveVoice.setDefaultVoice(voiceName);
         };
 
         sayWord = function() {
@@ -103,7 +104,7 @@ define([        "jquery",   "store",    "app/languageCodes",    "app/wordlists"]
         };
 
         sayThisWord = function(word) {
-            responsiveVoice.speak(word, voiceName);
+            responsiveVoice.speak(word);
         };
 
         displayRandom = function() {
@@ -125,25 +126,25 @@ define([        "jquery",   "store",    "app/languageCodes",    "app/wordlists"]
             $("#word").empty();
             $("#word").append("-");
         };
-        
-        initialiseVoice = function(){
+
+        initialiseVoice = function() {
             loadVoiceList();
 
             voiceName = store.get("voiceName");
-            if(!voiceName) { voiceName = $(".voiceOption")[0];}
+            if (!voiceName) { voiceName = $(".voiceOption")[0]; }
             loadVoiceByName(voiceName);
         };
 
-        initialiseWordLists = function(){
+        initialiseWordLists = function() {
             loadSetListList();
             $("#setListsSelection").change(function() { loadSetList(); });
-            
+
             var startingWordSet = store.get("wordSet");
-            if(!startingWordSet) { startingWordSet = wordlists[0].setListName;}
+            if (!startingWordSet) { startingWordSet = wordlists[0].setListName; }
             loadSetListFromName(startingWordSet);
 
             var startingSetList = store.get("setList");
-            if(!startingSetList) { startingSetList = wordlists[0].sets[0].setListName;}
+            if (!startingSetList) { startingSetList = wordlists[0].sets[0].setListName; }
         };
 
         initialise = function() {

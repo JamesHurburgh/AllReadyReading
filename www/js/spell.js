@@ -41,10 +41,10 @@ requirejs(['jquery', 'app/common', "store", "app/languageCodes", "app/wordlists"
         };
 
         check = function() {
-            var correct = $("#spellingWord").val().toLowerCase().trim();
+            var correctAnswer = $("#spellingWord").val().toLowerCase().trim();
             var answer = $("#typedWord").val().toLowerCase().trim();
 
-            if (correct == answer) {
+            if (correctAnswer == answer) {
                 correct();
             } else {
                 incorrect();
@@ -72,6 +72,7 @@ requirejs(['jquery', 'app/common', "store", "app/languageCodes", "app/wordlists"
             $("#wordContainer").css("border-radius", "10px");
             $("#wordContainer").css("border", "4px solid white");
             $("#wordContainer").css("border", "4px solid #" + set.colorHex);
+            $("#overlay").addClass("hidden");
         };
 
         initialise = function() {

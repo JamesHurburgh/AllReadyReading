@@ -95,6 +95,7 @@ requirejs(['jquery', 'app/common', "store", "app/languageCodes", "app/wordlists"
             $("#wordContainer").css("border-radius", "10px");
             $("#wordContainer").css("border", "4px solid white");
             $("#wordContainer").css("border", "4px solid #" + set.colorHex);
+            $("#overlay").addClass("hidden");
         };
 
         initialise = function() {

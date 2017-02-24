@@ -25,7 +25,7 @@ requirejs(['jquery', 'app/common', "store", "app/languageCodes", "app/wordlists"
         workingList = [];
 
         sayWord = function() {
-            sayThisWord($("#word").html());
+            say($("#word").html());
         };
 
         loadSetFromList = function(setList) {

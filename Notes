@@ -26,20 +26,23 @@ Can you ______________ me a toy?
     [X] Set
     [ ] Word list
 [ ] Game Mechanics:
-    [ ] Find: Speak word and give a few words as options to choose from
+    [X] Find: Speak word and give a few words as options to choose from
     [X] Spell: Speak word and get user to spell it
     [ ] Fix: Show most of a word and get player to fill in the missing letter.
-    [ ] Read: Show a word and get player to speak it (requires speech to text)
+    [X] Read: Show a word.
+        [ ] Get player to speak it (requires speech to text)
 [ ] Game progress types:
     [ ] Boy filling a well with a bucket
     [ ] Pull a horse across a feild
     [ ] Mine precious metals to fill a cart
-[ ] Keep statistics on progress  
-    [ ] Use statistics to target learning
 [X] Covert navbar drop down lists into bootstrap drop downs
 [ ] Search for words in list.
 [ ] Add text versions of how to 'sound out' words
 [ ] Add overlay before options are chosen
+[ ] Login
+    [ ] Hash based avatars http://stackoverflow.com/questions/7616461/generate-a-hash-from-string-in-javascript-jquery?answertab=active#tab-top
+    [ ] Keep statistics on progress  
+        [ ] Use statistics to target learning
 
 # Bugs
 Used it on safari on my iPhone it works only the "I" says " capital " instead of "I" hope this helps

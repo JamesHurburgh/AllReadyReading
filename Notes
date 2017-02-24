@@ -21,21 +21,25 @@ Can you _____________ home please?
 Can you ______________ me a toy?
 
 # TODOs
-* Store where the user last was (set list, voice, word list)
-* Game Mechanics:
-    * Find: Speak word and give a few words as options to choose from
-    * Spell: Speak word and get user to spell it
-    * Fix: Show most of a word and get player to fill in the missing letter.
-    * Read: Show a word and get player to speak it (requires speech to text)
-* Game progress types:
-    * Boy filling a well with a bucket
-    * Pull a horse across a feild
-    * Mine precious metals to fill a cart
-* Keep statistics on progress  
-    * Use statistics to target learning
-* Covert navbar drop down lists into bootstrap drop downs
-* Search for words in list.
-* Add text versions of how to 'sound out' words
+[ ] Store where the user last was
+    [X] Voice
+    [X] Set
+    [ ] Word list
+[ ] Game Mechanics:
+    [ ] Find: Speak word and give a few words as options to choose from
+    [X] Spell: Speak word and get user to spell it
+    [ ] Fix: Show most of a word and get player to fill in the missing letter.
+    [ ] Read: Show a word and get player to speak it (requires speech to text)
+[ ] Game progress types:
+    [ ] Boy filling a well with a bucket
+    [ ] Pull a horse across a feild
+    [ ] Mine precious metals to fill a cart
+[ ] Keep statistics on progress  
+    [ ] Use statistics to target learning
+[X] Covert navbar drop down lists into bootstrap drop downs
+[ ] Search for words in list.
+[ ] Add text versions of how to 'sound out' words
+[ ] Add overlay before options are chosen
 
 # Bugs
 Used it on safari on my iPhone it works only the "I" says " capital " instead of "I" hope this helps

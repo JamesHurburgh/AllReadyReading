@@ -25,30 +25,53 @@ requirejs(['jquery', 'app/common', "store", "app/languageCodes", "app/wordlists"
         var set;
 
         chooseNew = function() {
-            var previous = $("#spellingWord").val();
+            var previous = $("#correctWord").val();
+            $("#wordFindContainer").empty();
+
+            // Select word
             var word = previous;
             while (previous == word) {
                 var index = Math.floor(set.wordList.length * Math.random());
                 word = set.wordList[index];
             }
-            $("#spellingWord").val(word);
-            $("#typedWord").val("");
-            saySlowly("Spell. " + word);
+            $("#correctWord").val(word);
+
+            // Add buttons
+            var numberOfOptions = Math.min(5, set.wordList.length);
+            var randomIndex = Math.floor(numberOfOptions * Math.random());
+            var options = [word];
+            var wordButton = $("<button type='button' class='btn btn-primary btn-lg correct'></button>").append(word);
+            
+            for(var i = 0; i < numberOfOptions; i ++){
+
+                if(i == randomIndex){
+                    $("#wordFindContainer").append(wordButton);
+                }else{
+                    var newWord = word;
+                    while($.inArray(newWord,options) != -1){
+                        var j = Math.floor(set.wordList.length * Math.random());
+                        newWord = set.wordList[j];
+                    }
+                    options.push(newWord);
+
+                    var incorrectWordButton = $("<button type='button' class='btn btn-primary btn-lg incorrect'></button>").append(newWord);
+                    $("#wordFindContainer").append(incorrectWordButton);    
+                }
+                
+            
+            }
+            
+            // Say word
+            saySlowly("Find. " + word);
+
+            // Wire buttons
+            $(".correct").click(function() { correct(); });
+            $(".incorrect").click(function() { incorrect(); });
         };
+
 
         sayWord = function() {
-            saySlowly($("#spellingWord").val());
-        };
-
-        check = function() {
-            var correct = $("#spellingWord").val().toLowerCase().trim();
-            var answer = $("#typedWord").val().toLowerCase().trim();
-
-            if (correct == answer) {
-                correct();
-            } else {
-                incorrect();
-            }
+            saySlowly($("#correctWord").val());
         };
 
         loadSetFromList = function(setList) {

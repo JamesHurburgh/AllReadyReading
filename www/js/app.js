@@ -19,7 +19,21 @@ requirejs.config({
 });
 
 // Start the main app logic.
-requirejs(['jquery', 'app/common'],
-    function($, common) {
+requirejs(['jquery', 'app/common', 'app/profiles'],
+    function($, common, profiles) {
 
+        loadProfileList = function(){
+            var profileList = getLocalProfiles();
+            $("#listOfProfiles").empty();
+            profileList.forEach(function(profile){
+                $("#listOfProfiles").append(profile.Name);
+            });
+        };
+
+        loadProfileList();
+
+        $("#addProfileButton").click(function(){
+            var profile = getLocalProfile($("#newProfileName").val());
+            loadProfileList();
+        });
     });

@@ -22,17 +22,40 @@ requirejs.config({
 requirejs(['jquery', 'app/common', 'app/profiles'],
     function($, common, profiles) {
 
-        loadProfileList = function(){
+        loadProfileList = function() {
             var profileList = getLocalProfiles();
+            $("#usersDropDownList").empty();
             $("#listOfProfiles").empty();
-            profileList.forEach(function(profile){
+            profileList.forEach(function(profile) {
                 $("#listOfProfiles").append(profile.Name);
+
+                var profileImage =
+                    $("<img/>")
+                    .attr("src", "https://robohash.org/" + profile.Name + ".png?size=40x40");
+                var profileLink =
+                    $("<a/>")
+                    .attr("href", "#" + profile.Name)
+                    .append(profile.Name)
+                    .append(profileImage);
+
+                $("#usersDropDownList").append($("<li>").append(profileLink));
+
             });
         };
 
-        loadProfileList();
+        loadCurrentUser = function() {
 
-        $("#addProfileButton").click(function(){
+            var profileName = "James";
+            $("#currentUser").empty();
+            $("#currentUser").append(profileName);
+            $("#currentUserImg").attr("src", "https://robohash.org/" + profileName + ".png?size=40x40");
+
+        };
+
+        loadProfileList();
+        loadCurrentUser();
+
+        $("#addProfileButton").click(function() {
             var profile = getLocalProfile($("#newProfileName").val());
             loadProfileList();
         });

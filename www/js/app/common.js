@@ -2,6 +2,7 @@ define(["jquery", "store", "app/languageCodes", "app/wordlists"],
     function($, store, languageCodes, wordlists) {
 
         voiceName = "";
+        profileName = "";
 
         loadSetListList = function() {
             for (var i = 0; i < wordlists.length; i++) {
@@ -59,15 +60,15 @@ define(["jquery", "store", "app/languageCodes", "app/wordlists"],
             responsiveVoice.setDefaultVoice(voiceName);
         };
 
-        correctAnswer = function(){
+        correctAnswer = function() {
             correct();
         };
 
-        correct = function(){
+        correct = function() {
             say("Correct");
         };
-        
-        incorrect = function(){
+
+        incorrect = function() {
             say("Incorrect");
         };
 

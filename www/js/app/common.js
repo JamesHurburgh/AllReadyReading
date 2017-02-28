@@ -1,5 +1,5 @@
-define(["jquery", "store", "app/languageCodes", "app/wordlists"],
-    function($, store, languageCodes, wordlists) {
+define(["jquery", "store", "app/languageCodes", "app/wordlists", 'app/profiles'],
+    function($, store, languageCodes, wordlists, profiles) {
 
         voiceName = "";
         profileName = "";
@@ -101,5 +101,56 @@ define(["jquery", "store", "app/languageCodes", "app/wordlists"],
             var startingSetList = store.get("setList");
             if (!startingSetList) { startingSetList = wordlists[0].sets[0].setListName; }
         };
+
+        
+        loadProfileList = function() {
+            var profileList = getLocalProfiles();
+            $("#usersDropDownList").empty();
+            $("#listOfProfiles").empty();
+            profileList.forEach(function(profile) {
+                $("#listOfProfiles").append(profile.Name);
+
+                var profileImage =
+                    $("<img/>")
+                    .attr("src", "https://robohash.org/" + profile.Name + ".png?size=40x40");
+                var profileLink =
+                    $("<a class='profileButton'/>")
+                    .attr("href", "#" + profile.Name)
+                    .append(profile.Name)
+                    .append(profileImage);
+
+                $("#usersDropDownList").append($("<li>").append(profileLink));
+
+            });
+            
+            $(".profileButton").click(function(){
+                loadProfile(this.href.split("#")[1]);
+            });
+        };
+
+        loadProfile = function(profileName){
+            setCurrentProfile(profileName);
+            loadCurrentUser();
+        }
+
+        loadCurrentUser = function() {
+
+            var profile = getCurrentProfile();
+            loadProfileList();
+
+            var profileName = profile.Name;
+            $("#currentUser").empty();
+            $("#currentUser").append(profileName);
+            $("#currentUserImg").attr("src", "https://robohash.org/" + profileName + ".png?size=40x40");
+
+        };
+
+        loadProfileList();
+        loadCurrentUser();
+
+        $("#addProfileButton").click(function() {
+            var profile = getLocalProfile($("#newProfileName").val());
+            loadProfileList();
+        });
 
     });

@@ -60,10 +60,6 @@ define(["jquery", "store", "app/languageCodes", "app/wordlists", 'app/profiles']
             responsiveVoice.setDefaultVoice(voiceName);
         };
 
-        correctAnswer = function() {
-            correct();
-        };
-
         correct = function() {
             say("Correct");
         };
@@ -86,7 +82,7 @@ define(["jquery", "store", "app/languageCodes", "app/wordlists", 'app/profiles']
             loadVoiceList();
 
             voiceName = store.get("voiceName");
-            if (!voiceName) { voiceName = $(".voiceOption")[0]; }
+            if (!voiceName || typeof voiceName != 'string') { voiceName = $(".voiceOption")[0].innerText; }
             loadVoiceByName(voiceName);
         };
 
@@ -102,33 +98,62 @@ define(["jquery", "store", "app/languageCodes", "app/wordlists", 'app/profiles']
             if (!startingSetList) { startingSetList = wordlists[0].sets[0].setListName; }
         };
 
-        
+        updateProfileStatistic = function(word, activity, isCorrect) {
+            var profile = getCurrentProfile();
+            if (!profile.wordContainer) { profile.wordContainer = {}; }
+            profile.wordContainer[word] = updateWordStatistic(profile.wordContainer[word], activity, isCorrect);
+            updateProfile(profile);
+        };
+
+        updateWordStatistic = function(wordStatistics, activity, isCorrect) {
+            if (!wordStatistics) { wordStatistics = {}; }
+            wordStatistics[activity] = updateActivityStatistics(wordStatistics[activity], isCorrect);
+            return wordStatistics;
+        };
+
+        updateActivityStatistics = function(activityStatistics, isCorrect) {
+            if (!activityStatistics) {
+                activityStatistics = {
+                    "correctCount": 0,
+                    "incorrectCount": 0,
+                };
+            }
+            if (isCorrect) {
+                activityStatistics.correctCount += 1;
+            } else {
+                activityStatistics.incorrectCount += 1;
+            }
+            // TODO add date markers
+
+            return activityStatistics;
+        };
+
         loadProfileList = function() {
             var profileList = getLocalProfiles();
             $("#usersDropDownList").empty();
             $("#listOfProfiles").empty();
-            profileList.forEach(function(profile) {
-                $("#listOfProfiles").append(profile.Name);
+            profileList.forEach(function(profileName) {
+                $("#listOfProfiles").append(profileName);
 
                 var profileImage =
                     $("<img/>")
-                    .attr("src", "https://robohash.org/" + profile.Name + ".png?size=40x40");
+                    .attr("src", "https://robohash.org/" + profileName + ".png?size=40x40");
                 var profileLink =
                     $("<a class='profileButton'/>")
-                    .attr("href", "#" + profile.Name)
-                    .append(profile.Name)
+                    .attr("href", "#" + profileName)
+                    .append(profileName)
                     .append(profileImage);
 
                 $("#usersDropDownList").append($("<li>").append(profileLink));
 
             });
-            
-            $(".profileButton").click(function(){
+
+            $(".profileButton").click(function() {
                 loadProfile(this.href.split("#")[1]);
             });
         };
 
-        loadProfile = function(profileName){
+        loadProfile = function(profileName) {
             setCurrentProfile(profileName);
             loadCurrentUser();
         }
@@ -149,7 +174,7 @@ define(["jquery", "store", "app/languageCodes", "app/wordlists", 'app/profiles']
         loadCurrentUser();
 
         $("#addProfileButton").click(function() {
-            var profile = getLocalProfile($("#newProfileName").val());
+            addProfile({ "Name": $("#newProfileName").val() });
             loadProfileList();
         });
 

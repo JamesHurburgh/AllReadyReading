@@ -45,7 +45,29 @@ requirejs(['jquery', 'app/common', "store", "app/languageCodes", "app/wordlists"
             saySlowly($("#spellingWord").val());
         };
 
-        handleIncorrect = function(){
+        check = function() {
+            var answer = $("#spellingWord").val().toLowerCase().trim();
+            var givenAnswer = $("#typedWord").val().toLowerCase().trim();
+
+            if (givenAnswer == answer) {
+                correctAnswer();
+                autoNext();
+            } else {
+                handleIncorrect();
+            }
+        };
+
+        correctAnswer = function(word) {
+            correct();
+            updateProfileStatistic(word, "Spell", true);
+        };
+
+        incorrectAnswer = function(word) {
+            handleIncorrect();
+            updateProfileStatistic(word, "Spell", false);
+        };
+
+        handleIncorrect = function() {
             incorrectCounter = incorrectCounter + 1;
             if (incorrectCounter >= 3) {
                 var word = $("#spellingWord").val();
@@ -53,18 +75,6 @@ requirejs(['jquery', 'app/common', "store", "app/languageCodes", "app/wordlists"
                 say(message);
             } else {
                 say("Incorrect.  Try again.");
-            };
-        }
-
-        check = function() {
-            var correctAnswer = $("#spellingWord").val().toLowerCase().trim();
-            var answer = $("#typedWord").val().toLowerCase().trim();
-
-            if (correctAnswer == answer) {
-                correct();
-                autoNext();
-            } else {
-                handelIncorrect();
             }
         };
 

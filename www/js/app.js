@@ -33,7 +33,7 @@ requirejs(['jquery', 'app/common', 'app/profiles'],
                     $("<img/>")
                     .attr("src", "https://robohash.org/" + profile.Name + ".png?size=40x40");
                 var profileLink =
-                    $("<a/>")
+                    $("<a class='profileButton'/>")
                     .attr("href", "#" + profile.Name)
                     .append(profile.Name)
                     .append(profileImage);
@@ -41,11 +41,23 @@ requirejs(['jquery', 'app/common', 'app/profiles'],
                 $("#usersDropDownList").append($("<li>").append(profileLink));
 
             });
+            
+            $(".profileButton").click(function(){
+                loadProfile(this.href.split("#")[1]);
+            });
         };
+
+        loadProfile = function(profileName){
+            setCurrentProfile(profileName);
+            loadCurrentUser();
+        }
 
         loadCurrentUser = function() {
 
-            var profileName = "James";
+            var profile = getCurrentProfile();
+            loadProfileList();
+
+            var profileName = profile.Name;
             $("#currentUser").empty();
             $("#currentUser").append(profileName);
             $("#currentUserImg").attr("src", "https://robohash.org/" + profileName + ".png?size=40x40");

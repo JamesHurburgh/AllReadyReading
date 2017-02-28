@@ -1,34 +1,48 @@
 define(["jquery", "store"],
     function($, store) {
 
-        var localProfilesKey = "localProfiles";
-
+        var keys = {
+            currentProfileName : 'currentProfileName',
+            localProfileList : "localProfiles"
+        };
+        
         getLocalProfiles = function(){
-            if(!store.get(localProfilesKey)){
-                store.set(localProfilesKey, []);
+            if(!store.get(keys.localProfileList)){
+                store.set(keys.localProfileList, []);
             }
-            return store.get(localProfilesKey);
+            return store.get(keys.localProfileList);
         };
 
         getLocalProfile = function(profileName){
+            var localProfile = null;
             getLocalProfiles().forEach(function(profile) {
                 if(profile.Name == profileName){
-                    this.profile = profile;
+                    localProfile = profile;
                 }
             }, this);
-            var profile = {"Name" : profileName};
-            if(!this.profile){
-                addProfile(profile);
-            }else{
-                profile = this.profile;
+            if(!localProfile){
+                localProfile = {"Name" : profileName};
+                addProfile(localProfile);
             }
-            return profile;
+            return localProfile;
         };
 
         addProfile = function(profile) {
             var profileList = getLocalProfiles();
             profileList.push(profile);
-            store.set(localProfilesKey, profileList);
+            store.set(keys.localProfileList, profileList);
         };
+
+        getCurrentProfile = function(){
+            var profileName = store.get(keys.currentProfileName);
+            if(!profileName){
+                profileName = "Guest";
+            }
+            return getLocalProfile(profileName);
+        }
+
+        setCurrentProfile = function(profileName){
+            store.set(keys.currentProfileName, profileName);
+        }
     }
 );

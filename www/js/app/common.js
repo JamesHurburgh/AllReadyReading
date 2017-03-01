@@ -13,19 +13,9 @@ define(["jquery", "store", "app/languageCodes", "app/wordlists", 'app/profiles']
                     $("<a href='#'>")
                     .attr("href", "#" + wordlists[i].setListName)
                     .append(wordlists[i].setListName);
-                setListName.click(function() { loadSetFromAnchor(this); });
+                setListName.click(function() { loadSetListFromName(this.href.split("#")[1]); });
                 $("#setListsDropDownList").append($("<li>").append(setListName));
             }
-        };
-
-        loadSetFromAnchor = function(anchor) {
-            var setName = anchor.href.split("#")[1];
-            loadSetFromList(wordlists[setName]);
-        };
-
-        loadSetListFromHash = function() {
-            var setName = window.location.hash.split("#")[1];
-            loadSetListFromName(wordlists[setName]);
         };
 
         loadSetListFromName = function(setName) {
@@ -56,7 +46,9 @@ define(["jquery", "store", "app/languageCodes", "app/wordlists", 'app/profiles']
         };
 
         loadVoiceByName = function(voiceName) {
-            store.set("voiceName", voiceName);
+            var profile = getCurrentProfile();
+            profile.voiceName = voiceName;
+            updateProfile(profile);
             responsiveVoice.setDefaultVoice(voiceName);
         };
 
@@ -81,7 +73,7 @@ define(["jquery", "store", "app/languageCodes", "app/wordlists", 'app/profiles']
         initialiseVoice = function() {
             loadVoiceList();
 
-            voiceName = store.get("voiceName");
+            voiceName = getCurrentProfile().voiceName;
             if (!voiceName || typeof voiceName != 'string') { voiceName = $(".voiceOption")[0].innerText; }
             loadVoiceByName(voiceName);
         };

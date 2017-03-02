@@ -28,33 +28,33 @@ requirejs(['jquery', 'app/common', 'app/profiles'],
 
         var words = Object.getOwnPropertyNames(currentProfile.wordContainer);
         words.sort();
-        
+
         $.each(words, function(index, word) {
             var wordStats = currentProfile.wordContainer[word];
-            
+
             var wordDetails = $("<div>").append($("<h4>").append(word));
-            
+
             var activityTypes = ["Find", "Spell"];
             activityTypes.forEach(function(activity) {
                 var activityStats = wordStats[activity];
-                if(activityStats !== null){
+                if (activityStats !== null && activityStats !== undefined) {
                     var activityDetails = $("<div>");
                     activityDetails.append(
                         $("<h5>")
                         .append(activity));
-                        var stats = $("<div class='progress progress-striped'>");
-                        var correctPercent = activityStats.correctCount/(activityStats.correctCount + activityStats.incorrectCount)*100;
-                        var correctBar = $("<div class='progress-bar progress-bar-success'>")
+                    var stats = $("<div class='progress progress-striped'>");
+                    var correctPercent = activityStats.correctCount / (activityStats.correctCount + activityStats.incorrectCount) * 100;
+                    var correctBar = $("<div class='progress-bar progress-bar-success'>")
                         .append("Correct: " + activityStats.correctCount)
-                        .attr("style", "width: "+correctPercent+"%");
-                        
-                        var incorrectPercent = activityStats.incorrectCount/(activityStats.correctCount + activityStats.incorrectCount)*100;
-                        var incorrectBar = $("<div class='progress-bar progress-bar-danger'>")
+                        .attr("style", "width: " + correctPercent + "%");
+
+                    var incorrectPercent = activityStats.incorrectCount / (activityStats.correctCount + activityStats.incorrectCount) * 100;
+                    var incorrectBar = $("<div class='progress-bar progress-bar-danger'>")
                         .append("Incorrect: " + activityStats.incorrectCount)
-                        .attr("style", "width: "+incorrectPercent+"%");
-                        
-                        stats.append(correctBar);
-                        stats.append(incorrectBar);
+                        .attr("style", "width: " + incorrectPercent + "%");
+
+                    stats.append(correctBar);
+                    stats.append(incorrectBar);
                     activityDetails.append(stats);
 
                     wordDetails.append(activityDetails);
@@ -63,7 +63,6 @@ requirejs(['jquery', 'app/common', 'app/profiles'],
             }, this);
             wordDetails.append("<hr>");
             $("#wordStatistics").append(wordDetails);
-            
+
         });
     });
-    

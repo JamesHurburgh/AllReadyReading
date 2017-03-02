@@ -1,3 +1,39 @@
+# TODOs
+[ ] Bug Fixes (see below)
+[ ] Login
+    [ ] Prevent punctuation in names
+    [ ] Store where the user last was
+        [X] Voice
+        [X] Set
+        [ ] Word list
+    [X] Hash based avatars
+    [X] Keep statistics on progress  
+        [X] View Statistics
+        [ ] Use statistics to target learning
+[ ] Game Mechanics:
+    [X] Find: Speak word and give a few words as options to choose 
+        [ ] Make it a game by hiding the words behind things
+    [X] Spell: Speak word and get user to spell it
+    [ ] Fix: Show most of a word and get player to fill in the missing letter.
+    [X] Read: Show a word.
+        [ ] Get player to speak it (requires speech to text)
+[ ] Game progress types:
+    [ ] Boy filling a well with a bucket
+    [ ] Pull a horse across a feild
+    [ ] Mine precious metals to fill a cart
+[X] Covert navbar drop down lists into bootstrap drop downs
+[ ] Convert wordlist to json format
+[ ] Break each wordlist into it's own file.
+[ ] Create example sentances to deal with homonyms.
+[ ] Search for words in list.
+[ ] Add text versions of how to 'sound out' words
+[ ] Add overlay before options are chosen
+[ ] Deal with speaking homonyms
+
+# Bugs
+Used it on safari on my iPhone it works only the "I" says " capital " instead of "I" hope this helps
+Yes, "I'll" says "capital I" as well. "Mr" says "M-R" instead of "mister" (but inclusion of that as a sight word has always annoyed me anyway).
+
 # Example Sentances (not sure what I wanted to do with these)
 I love you ______________________.
 My _________________________ is beautiful.
@@ -19,34 +55,3 @@ You're going up the _______________.
 ____________________ are my toys.
 Can you _____________ home please?
 Can you ______________ me a toy?
-
-# TODOs
-[ ] Login
-    [ ] Prevent punctuation in names
-    [ ] Store where the user last was
-        [X] Voice
-        [X] Set
-        [ ] Word list
-    [X] Hash based avatars
-    [ ] Keep statistics on progress  
-        [ ] View Statistics
-        [ ] Use statistics to target learning
-[ ] Game Mechanics:
-    [X] Find: Speak word and give a few words as options to choose 
-        [ ] Make it a game by hiding the words behind things
-    [X] Spell: Speak word and get user to spell it
-    [ ] Fix: Show most of a word and get player to fill in the missing letter.
-    [X] Read: Show a word.
-        [ ] Get player to speak it (requires speech to text)
-[ ] Game progress types:
-    [ ] Boy filling a well with a bucket
-    [ ] Pull a horse across a feild
-    [ ] Mine precious metals to fill a cart
-[X] Covert navbar drop down lists into bootstrap drop downs
-[ ] Search for words in list.
-[ ] Add text versions of how to 'sound out' words
-[ ] Add overlay before options are chosen
-
-# Bugs
-Used it on safari on my iPhone it works only the "I" says " capital " instead of "I" hope this helps
-Yes, "I'll" says "capital I" as well. "Mr" says "M-R" instead of "mister" (but inclusion of that as a sight word has always annoyed me anyway).

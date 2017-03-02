@@ -1,0 +1,10 @@
+{
+    "setListName": "Basics", //From: Created by James Hurburgh
+    "languageCode": "en",
+    "description": "Created by James Hurburgh, this set provides the basics of numeracy and literacy and should provide a good base to begin learning standard sight words.",
+    "sets": [
+        { "setNumber": "1", "setName": "AlphabetLowercase", "colorHex": "00FF00", "wordList": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"] },
+        { "setNumber": "2", "setName": "AlphabetUppercase", "colorHex": "0F00F0", "wordList": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"] },
+        { "setNumber": "3", "setName": "Numerals0to9", "colorHex": "F00F00", "wordList": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"] }
+    ]
+}

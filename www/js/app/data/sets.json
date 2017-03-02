@@ -1,0 +1,32 @@
+{
+    "sets": [
+        {
+            "setName" : "Ayres",
+            "fileName" : "ayres.json"
+        },
+        {
+            "setName" : "Basics",
+            "fileName" : "basics.json"
+        },
+        {
+            "setName" : "Dolch",
+            "fileName" : "dolch.json"
+        },
+        {
+            "setName" : "Fry",
+            "fileName" : "fry.json"
+        },
+        {
+            "setName" : "Magic Sight Words",
+            "fileName" : "magic-sight-words.json"
+        },
+        {
+            "setName" : "Sound Waves",
+            "fileName" : "sound-waves.json"
+        },
+        {
+            "setName" : "Topical",
+            "fileName" : "topical.json"
+        }
+    ]
+}

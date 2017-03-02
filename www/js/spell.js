@@ -50,10 +50,10 @@ requirejs(['jquery', 'app/common', "store", "app/languageCodes", "app/wordlists"
             var givenAnswer = $("#typedWord").val().toLowerCase().trim();
 
             if (givenAnswer == answer) {
-                correctAnswer();
+                correctAnswer(answer);
                 autoNext();
             } else {
-                handleIncorrect();
+                incorrectAnswer(answer);
             }
         };
 

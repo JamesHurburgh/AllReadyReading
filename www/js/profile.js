@@ -27,21 +27,17 @@ requirejs(['jquery', 'app/common', 'app/profiles'],
         $("#voice").val(currentProfile.voiceName);
 
         var words = Object.getOwnPropertyNames(currentProfile.wordContainer);
+        words.sort();
         
         $.each(words, function(index, word) {
             var wordStats = currentProfile.wordContainer[word];
             
-            var wordDetails = $("<div>")
-            // var wordDetails = $("<a href='#' aria-controls='home' role='tab' data-toggle='tab'>")
-                //.attr("class", "nav-link")
-                .append($("<h4>").append(word));
+            var wordDetails = $("<div>").append($("<h4>").append(word));
             
             var activityTypes = ["Find", "Spell"];
             activityTypes.forEach(function(activity) {
                 var activityStats = wordStats[activity];
-                if(!activityStats){
-
-                }else{
+                if(activityStats !== null){
                     var activityDetails = $("<div>");
                     activityDetails.append(
                         $("<h5>")
@@ -66,11 +62,8 @@ requirejs(['jquery', 'app/common', 'app/profiles'],
 
             }, this);
             wordDetails.append("<hr>");
-            //<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
             $("#wordStatistics").append(wordDetails);
             
         });
-
-
-
     });
+    

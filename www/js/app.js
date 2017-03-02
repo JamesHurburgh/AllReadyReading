@@ -22,4 +22,7 @@ requirejs.config({
 requirejs(['jquery', 'app/common', 'app/profiles'],
     function($, common, profiles) {
 
+        initialiseVoice();
+        initialiseWordLists();
+
     });

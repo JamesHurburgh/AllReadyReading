@@ -65,4 +65,12 @@ requirejs(['jquery', 'app/common', 'app/profiles'],
             $("#wordStatistics").append(wordDetails);
 
         });
+
+        initialise = function() {
+
+            initialiseVoice();
+            initialiseWordLists();
+        };
+
+        initialise();
     });

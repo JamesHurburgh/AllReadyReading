@@ -79,6 +79,7 @@ requirejs(['jquery', 'app/common', "store", "app/languageCodes", "app/wordlists"
         };
 
         autoNext = function() {
+            clearInterval(timer);
             timer = setInterval(chooseNew, 3000);
         };
 

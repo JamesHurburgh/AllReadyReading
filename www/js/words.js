@@ -37,9 +37,13 @@ requirejs(['jquery', 'app/common', "store", "app/languageCodes", "app/wordDao"],
                         .attr("id", set.setCode)
                         .attr("class", "collapse");
 
-                    content.append("BLAH Blah blah.");
-
-
+                    wordDao.getWordListNames(set.setName).then(
+                        function(wordListNames){
+                            content.append(wordListNames[0]);
+                            console.log("Word list length:" + wordListNames.length);
+        
+                        });
+                        
                     setDisplay.append(content);
 
                     $("#sets").append(setDisplay);

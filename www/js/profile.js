@@ -22,55 +22,66 @@ requirejs.config({
 requirejs(['jquery', 'app/common', 'app/profiles'],
     function($, common, profiles) {
 
-        var currentProfile = getCurrentProfile();
-        $("#userName").append(currentProfile.Name);
-        $("#voice").val(currentProfile.voiceName);
+        displayProfile = function() {
+            $(".profileButton").click(function() { displayProfile(); });
+            $("#userName").empty();
+            $("#wordStatistics").empty();
 
-        var words = Object.getOwnPropertyNames(currentProfile.wordContainer);
-        words.sort();
+            var currentProfile = getCurrentProfile();
+            $("#userName").append(currentProfile.Name);
+            $("#voice").val(currentProfile.voiceName);
 
-        $.each(words, function(index, word) {
-            var wordStats = currentProfile.wordContainer[word];
+            if (!currentProfile.wordContainer) { return; }
+            var words = Object.getOwnPropertyNames(currentProfile.wordContainer);
 
-            var wordDetails = $("<div>").append($("<h4>").append(word));
+            words.sort();
 
-            var activityTypes = ["Find", "Spell"];
-            activityTypes.forEach(function(activity) {
-                var activityStats = wordStats[activity];
-                if (activityStats !== null && activityStats !== undefined) {
-                    var activityDetails = $("<div>");
-                    activityDetails.append(
-                        $("<h5>")
-                        .append(activity));
-                    var stats = $("<div class='progress progress-striped'>");
-                    var correctPercent = activityStats.correctCount / (activityStats.correctCount + activityStats.incorrectCount) * 100;
-                    var correctBar = $("<div class='progress-bar progress-bar-success'>")
-                        .append("Correct: " + activityStats.correctCount)
-                        .attr("style", "width: " + correctPercent + "%");
 
-                    var incorrectPercent = activityStats.incorrectCount / (activityStats.correctCount + activityStats.incorrectCount) * 100;
-                    var incorrectBar = $("<div class='progress-bar progress-bar-danger'>")
-                        .append("Incorrect: " + activityStats.incorrectCount)
-                        .attr("style", "width: " + incorrectPercent + "%");
+            $.each(words, function(index, word) {
+                var wordStats = currentProfile.wordContainer[word];
 
-                    stats.append(correctBar);
-                    stats.append(incorrectBar);
-                    activityDetails.append(stats);
+                var wordDetails = $("<div>").append($("<h4>").append(word));
 
-                    wordDetails.append(activityDetails);
-                }
+                var activityTypes = ["Find", "Spell"];
+                activityTypes.forEach(function(activity) {
+                    var activityStats = wordStats[activity];
+                    if (activityStats !== null && activityStats !== undefined) {
+                        var activityDetails = $("<div>");
+                        activityDetails.append(
+                            $("<h5>")
+                            .append(activity));
+                        var stats = $("<div class='progress progress-striped'>");
+                        var correctPercent = activityStats.correctCount / (activityStats.correctCount + activityStats.incorrectCount) * 100;
+                        var correctBar = $("<div class='progress-bar progress-bar-success'>")
+                            .append("Correct: " + activityStats.correctCount)
+                            .attr("style", "width: " + correctPercent + "%");
 
-            }, this);
-            wordDetails.append("<hr>");
-            $("#wordStatistics").append(wordDetails);
+                        var incorrectPercent = activityStats.incorrectCount / (activityStats.correctCount + activityStats.incorrectCount) * 100;
+                        var incorrectBar = $("<div class='progress-bar progress-bar-danger'>")
+                            .append("Incorrect: " + activityStats.incorrectCount)
+                            .attr("style", "width: " + incorrectPercent + "%");
 
-        });
+                        stats.append(correctBar);
+                        stats.append(incorrectBar);
+                        activityDetails.append(stats);
 
-        initialise = function() {
+                        wordDetails.append(activityDetails);
+                    }
 
-            initialiseVoice();
-            initialiseWordLists();
+                }, this);
+                wordDetails.append("<hr>");
+                $("#wordStatistics").append(wordDetails);
+
+            });
         };
 
-        initialise();
+        initialiseWordLists = function() {
+            loadSetListList();
+            $("#setListsSelection").change(function() { loadSetList(); });
+        };
+
+        initialiseVoice();
+        initialiseWordLists();
+        displayProfile();
+
     });

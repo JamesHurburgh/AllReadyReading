@@ -26,9 +26,13 @@
 <body>
     <div id="fb-root"></div>
     <nav></nav>
-    <div class="container">
+    <div id="app" class="container">
+
+        <div v-for="set in sets">
+            {{ set }}
+        </div>
         <div id="content" class="row">
-            <h2>Sets</h2>
+            <h2>Sets {{ setsCount }} </h2>
             <div id="sets"></div>
         </div>
     </div>

@@ -7,6 +7,7 @@
         [X] Set
         [ ] Word list
     [X] Hash based avatars
+    [ ] Delete profile
     [X] Keep statistics on progress  
         [X] View Statistics
         [ ] Use statistics to target learning
@@ -18,17 +19,17 @@
     [X] Read: Show a word.
         [ ] Get player to speak it (requires speech to text)
 [ ] Game progress types:
+    [ ] Mine precious metals to fill a cart
     [ ] Boy filling a well with a bucket
     [ ] Pull a horse across a feild
-    [ ] Mine precious metals to fill a cart
 [X] Covert navbar drop down lists into bootstrap drop downs
 [ ] Convert wordlist to json format
-[ ] Break each wordlist into it's own file.
-[ ] Create example sentances to deal with homonyms.
+[X] Break each wordlist into it's own file.
 [ ] Search for words in list.
 [ ] Add text versions of how to 'sound out' words
-[ ] Add overlay before options are chosen
+[ ] Add overlay before options are chosen.  What does this mean?
 [ ] Deal with speaking homonyms
+    [ ] Create example sentances to deal with homonyms.
 
 # Bugs
 Used it on safari on my iPhone it works only the "I" says " capital " instead of "I" hope this helps
